@@ -1,1 +1,5 @@
-from sqlalchemy import Column, Integer, String, DateTime\nfrom sqlalchemy.ext.declarative import declarative_base\n\nBase = declarative_base()\n\nclass User(Base):\n    __tablename__ = 'users'\n\n    id = Column(Integer, primary_key=True, autoincrement=True)\n    username = Column(String(50), unique=True, nullable=False)\n    email = Column(String(100), unique=True, nullable=False)\n    created_at = Column(DateTime, default=models.func.now())\n    updated_at = Column(DateTime, onupdate=models.func.now())\n\n    def __repr__(self):\n        return f'<User(id={self.id}, username={self.username}, email={self.email})>'\n
+from pydantic import BaseModel
+
+class User(BaseModel):
+    name: str
+    email: str
